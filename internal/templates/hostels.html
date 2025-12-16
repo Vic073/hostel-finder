@@ -1,0 +1,48 @@
+{{ define "content" }}
+
+
+<h1>Available Hostels</h1>
+
+<form method="GET" action="/" style="margin-bottom:20px;">
+	<input 
+		type="text" 
+		name="location" 
+		placeholder="Location"
+		value="{{ .Location }}"
+	/>
+
+	<input 
+		type="number" 
+		name="max_price" 
+		placeholder="Max Price"
+		value="{{ .MaxPrice }}"
+	/>
+
+	<button type="submit">Search</button>
+</form>
+
+
+<h1>Available Hostels</h1>
+
+{{ if .Hostels }}
+	{{ range .Hostels }}
+		<div class="card">
+			<h2>{{ .Name }}</h2>
+			<p><strong>Location:</strong> {{ .Location }}</p>
+			<p><strong>Price:</strong> ${{ .Price }}</p>
+			<p>{{ .Description }}</p>
+
+			{{ if .Images }}
+				<div>
+					{{ range .Images }}
+						<img src="{{ . }}" />
+					{{ end }}
+				</div>
+			{{ end }}
+		</div>
+	{{ end }}
+{{ else }}
+	<p>No hostels found.</p>
+{{ end }}
+
+{{ end }}
