@@ -4,6 +4,7 @@ import (
 	"hostel-finder/internal/config"
 	"hostel-finder/internal/database"
 	"hostel-finder/internal/routes"
+	"hostel-finder/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,8 @@ func main() {
 	database.Migrate()
 
 	r := gin.Default()
+	r.Use(middleware.CORSMiddleware())
+
 
 	r.Static("/uploads", "./uploads")
 
